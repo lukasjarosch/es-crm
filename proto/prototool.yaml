@@ -1,0 +1,23 @@
+protoc:
+  version: 3.8.0
+lint:
+  group: uber2
+
+generate:
+  go_options:
+    import_path: test/api
+  plugins:
+    - name: go
+      type: go
+      flags: plugins=grpc
+      output: ./gen/go
+    - name: validate
+      type: go
+      flags: lang=go
+      output: ./gen/go
+    - name: js
+      output: ./gen/js
+      flags: import_style=commonjs,binary
+    - name: grpc-web
+      output: ./gen/js
+      flags: import_style=commonjs,mode=grpcwebtext

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package crm.eventstore.v1;
+
+option csharp_namespace = "Crm.Eventstore.V1";
+option go_package = "eventstorev1";
+option java_multiple_files = true;
+option java_outer_classname = "EventStoreApiProto";
+option java_package = "com.crm.eventstore.v1";
+option objc_class_prefix = "CEX";
+option php_namespace = "Crm\\Eventstore\\V1";
+
+import "crm/eventstore/v1/event_store.proto";
+
+// EventStoreAPI exposes the event-store.
+service EventStoreAPI {
+  // GetEvents will return events, given a filter.
+  rpc GetEvents(GetEventsRequest) returns (GetEventsResponse);
+  // CreateEvent will store an event with the given Event data.
+  rpc CreateEvent(CreateEventRequest) returns (CreateEventResponse);
+}
+
+message GetEventsRequest {
+  EventFilter filter = 1;
+}
+
+message GetEventsResponse {
+  repeated Event events = 1;
+}
+
+message CreateEventRequest {
+  Event event = 1;
+}
+
+message CreateEventResponse {}
